@@ -17,9 +17,13 @@
         <a href="<?php echo home_url('/'); ?>"><img src="<?php bloginfo('template_url'); ?>/images/site_id.png" width="322" height="42" alt="<?php bloginfo('description'); ?><?php bloginfo('name'); ?>" /></a>
       </h1>
       <div class="utility">
-        <ul>
-          <li><a href="#">採用情報</a></li>
-        </ul>
+<?php 
+  wp_nav_menu(array(
+    'container' => false,
+    'theme_location' => 'place_pc_utility',
+    ));
+?>
+
         <div id="search" role="search">
           <form role="search" method="get" id="searchform" class="searchform" action="#">
             <div>
@@ -30,11 +34,14 @@
         </div><!-- #search end -->
       </div><!-- .utility end -->
     </div><!-- .inner end -->
-    <div id="global_nav">
-      <ul>
-        <li class="current-menu-item menu-item-slug-top"><a href="#">トップページ</a></li>
-      </ul>
-    </div>
+<?php 
+  wp_nav_menu(array(
+    'container' => 'div',
+    'container_id' => 'global_nav',
+    'theme_location' => 'place_pc_global',
+    'depth' => 3,
+  ));
+ ?>
   </div><!-- #header end -->
 <?php
   if (!is_front_page()) :
