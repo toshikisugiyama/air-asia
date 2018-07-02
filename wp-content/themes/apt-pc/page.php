@@ -16,6 +16,6 @@
 <?php get_template_part('page_top_link'); ?>
       </div><!-- end #content -->
     </div><!-- end #main -->
-<?php get_sidebar(); ?>
+<?php get_sidebar('page'); ?>
   </div><!-- end #container -->
 <?php get_footer(); ?>
