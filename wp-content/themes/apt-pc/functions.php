@@ -45,7 +45,7 @@ function apt_category_id($tax='category'){
 }
 
 //カテゴリ情報を取得する
-function apt_category_info($tax='categoty'){
+function apt_category_info($tax='category'){
   global $post;
   $cat = get_the_terms($post->ID, $tax);
   $obj = new stdClass;
@@ -58,4 +58,38 @@ function apt_category_info($tax='categoty'){
     $obj->slug = '';
   }
   return $obj;
+}
+
+// カスタム投稿タイプ・カスタム分類
+add_action('init', 'register_post_type_and_taxonomy');
+function register_post_type_and_taxonomy(){
+  register_post_type(
+    'branch',
+    array(
+      'labels' => array(
+        'name' => '営業所情報',
+        'add_new_item' => '営業所を追加',
+        'edit_item' => '営業所の編集',
+  ),
+      'public' => true,
+      'hierarchical' => true,
+      'supports' => array(
+        'title',
+        'editor',
+        'excerpt',
+        'custom-fields',
+        'thumbnail',
+        'page-attributes',
+      ),
+    )
+  );
+}
+
+//wp_list_pagesのクラス属性を変更する。
+function apt_add_current($output){
+  global $post;
+  $oid = "page-item-{$post->ID}";
+  $cid = "oid curredt_page_item";
+  $outoput = preg_replace("/$oid/",$cid,$output);
+  return $output;
 }
