@@ -53,7 +53,9 @@
   </div><!-- .category_image end -->
 <?php
   if (class_exists('WP_SiteManager_bread_crumb')):
+    add_filter('bread_crumb_arr','apt_bread_crumb');
     WP_SiteManager_bread_crumb::bread_crumb('navi_element=div&elm_id=bread_crumb');
+    remove_filter('bread_crumb_arr','apt_bread_crumb');
   endif;
 ?>
 <?php
