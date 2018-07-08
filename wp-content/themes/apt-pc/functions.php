@@ -135,3 +135,21 @@ add_image_size('main_image', 370);
 add_image_size('tour-archive', 280);
 add_image_size('sub_image', 150);
 
+// ツアー情報のパンくずナビを修正します。
+function apt_bread_crumb($arr){
+  if (is_tax('area')&&count($arr)==2) {
+    $arr[2]=$arr[1];
+    $arr[1]=array('title'=>'ツアー情報','link'=>get_permalink(get_page_by_path('tour-info')));
+  }
+  return $arr;
+}
+
+// 数字を円貨幣のフォーマットに整形します。
+function apt_convert_yen($yen){
+  $yen = mb_convert_kana($yen,'n','UTF-8');
+  $yen = preg_replace('/[^0-9]/','',$yen);
+  if (is_numeric($yen)) {
+    $yen = number_format($yen).'円';
+    return $yen;
+  }
+}
