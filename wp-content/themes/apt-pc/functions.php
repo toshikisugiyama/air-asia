@@ -153,3 +153,35 @@ function apt_convert_yen($yen){
     return $yen;
   }
 }
+
+// タイトルタグのテキストを出力します。
+function apt_simple_title(){
+  if (!is_front_page()) {
+    echo trim(wp_title('',false))."|";
+  }
+  bloginfo('name');
+}
+
+// サイトIDのタグをトップページとそれ以外で切り替えます。
+function apt_site_id(){
+  if (is_front_page()) {
+    echo "h1";
+  }else{
+    echo "div";
+  }
+}
+
+// 検索ワードが未入力または0の場合にsearch.phpをテンプレートとして使用する
+function apt_search_redirect(){
+  global $wp_query;
+  $wp_query->is_search = true;
+  $wp_query->is_home = false;
+  if (file_exists(TEMPLATEPATH.'/search.php')) {
+    include(TEMPLATEPATH.'/search.php');
+  }
+  exit;
+}
+
+if (isset($_GET['s']) && $_GET['s'] == false) {
+  add_action('template_redirect','apt_search_redirect');
+}
