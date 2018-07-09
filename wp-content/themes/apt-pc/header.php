@@ -30,6 +30,7 @@
       </div><!-- .utility end -->
     </div><!-- .inner end -->
 <?php 
+  add_filter('nav_menu_css_class', 'apt_current_nav',10,2);
   add_filter('nav_menu_css_class', 'apt_slug_nav', 10, 2);
   wp_nav_menu(array(
     'container' => 'div',
@@ -37,6 +38,7 @@
     'theme_location' => 'place_pc_global',
     'depth' => 3,
   ));
+  remove_filter('nav_menu_css_class','apt_current_nav');
   remove_filter('nav_menu_css_class', 'apt_slug_nav');
  ?>
   </div><!-- #header end -->
@@ -44,7 +46,7 @@
   if (!is_front_page()) :
 ?>
   <div class="category_image">
-    <img src="<?php bloginfo('template_url'); ?>/images/sub/img_cat_def.png" width="950" height="120" alt="">
+    <img src="<?php bloginfo('template_url'); ?>/images/sub/<?php echo apt_category_image(); ?>" width="950" height="120" alt="">
   </div><!-- .category_image end -->
 <?php
   if (class_exists('WP_SiteManager_bread_crumb')):

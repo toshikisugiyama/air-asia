@@ -32,6 +32,7 @@
     </p>
   </div><!-- #footer end -->
 </div><!-- #footer-container end -->
+<?php wp_enqueue_script('scrolljs',get_template_directory_uri().'/js/scroll.js'); ?>
 <?php wp_footer(); ?>
 </body>
 </html>
